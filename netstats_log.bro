@@ -19,12 +19,14 @@ export {
 		## See base/frameworks/packet-filter/main.bro. Depending on the packet capture system, this value may not be
 		## available and will then be always set to zero.
 		pkts_link: count &log &optional;
- 		## Bytes received by Bro.
+		## Bytes received by Bro.
 		bytes_recvd: count &log &optional;
+		## This is a string representation of the node logging
+		node: string &log &optional;
 	};
 
 	## This is the interval between individual netstats collection.
-    	const netstats_collection_interval = 1min;
+	const netstats_collection_interval = 1min;
 
 	global log_netstats: event(rec: Info);
 }
@@ -38,6 +40,7 @@ event net_stats_update(last_stat: NetStats)
 	info$pkts_dropped 	= ns$pkts_dropped;
 	info$pkts_link 		= ns$pkts_link;
 	info$bytes_recvd	= ns$bytes_recvd;
+	info$node			= peer_description;
 
 	Log::write(netstats::LOG, info);
 
@@ -48,5 +51,5 @@ event bro_init()
 {
 	Log::create_stream(netstats::LOG, [$columns=Info, $ev=log_netstats]);
 
-    	schedule netstats_collection_interval { net_stats_update(net_stats()) };
+	schedule netstats_collection_interval { net_stats_update(net_stats()) };
 }
