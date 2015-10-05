@@ -24,7 +24,7 @@ export {
 	};
 
 	## This is the interval between individual netstats collection.
-    const netstats_collection_interval = 1min;
+    	const netstats_collection_interval = 1min;
 
 	global log_netstats: event(rec: Info);
 }
@@ -46,7 +46,7 @@ event net_stats_update(last_stat: NetStats)
 
 event bro_init()
 {
-    Log::create_stream(netstats::LOG, [$columns=Info, $ev=log_netstats]);
+	Log::create_stream(netstats::LOG, [$columns=Info, $ev=log_netstats]);
 
-    schedule netstats_collection_interval { net_stats_update(net_stats()) };
+    	schedule netstats_collection_interval { net_stats_update(net_stats()) };
 }
