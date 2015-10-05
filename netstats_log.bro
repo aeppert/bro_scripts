@@ -10,7 +10,7 @@ export {
 
 	type Info: record {
 		## Timestamp
-		ts:				time		&log;
+		ts:	time &log;
 		## Packets received by Bro.
 		pkts_recvd: count &log &optional;
 		## Packets reported dropped by the system.
