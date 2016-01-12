@@ -1,3 +1,10 @@
+#
+# Aaron Eppert
+#
+
+@load base/protocols/http/main
+@load base/protocols/http/utils
+
 redef record HTTP::Info += {
 	version: string &log &optional;
 };
