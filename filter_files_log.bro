@@ -18,12 +18,8 @@ event bro_init()
 			if ( rec?$analyzers ) {
 				for (wl_entry in whitelist) {
 					if ( wl_entry in rec$analyzers ) {
-						result = T;
-						break; 
-					} else {
-						result = F;
+						return T;
 					}
-	
 				}
 			}
 			
