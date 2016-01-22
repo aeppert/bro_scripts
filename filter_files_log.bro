@@ -12,7 +12,7 @@ export {
 event bro_init()
 {
   Log::remove_default_filter(Files::LOG);
-  Log::add_filter(Files::LOG, [$name = "files-noise",
+  Log::add_filter(Files::LOG, [$name = "files-log-filter-whitelist",
     $pred(rec: Files::Info) = {
       local result = T;
       if ( rec?$analyzers ) {
