@@ -45,11 +45,11 @@ redef record connection += {
 
 event protocol_confirmation(c: connection, atype: Analyzer::Tag, aid: count) &priority=30
 {
-	if ( atype in analyzerTagToString) {
-		if ( ! c?$analyzers ) {
-	        c$analyzers = table();
-		}
-		
-		c$analyzers[atype] = aid;
-	}
+  if ( atype in analyzerTagToString) {
+    if ( ! c?$analyzers ) {
+      c$analyzers = table();
+    }
+  
+    c$analyzers[atype] = aid;
+  }
 }
