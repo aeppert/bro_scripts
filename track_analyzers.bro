@@ -3,7 +3,7 @@
 #
 # Track analyzers attached to a connection in a general manner.
 #
-# This could be used with https://github.com/JustinAzoff/bro-react/blob/master/conn-bulk.bro
+# This could be used with https://github.com/aeppert/bro-react/blob/master/conn-bulk.bro
 # to shunt traffic over thresholds.
 #
 
