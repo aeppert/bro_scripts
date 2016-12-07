@@ -71,8 +71,6 @@ event process_known_hash(description: Input::EventDescription, tpe: Input::Event
                               $threat_level=r$threat_level,
                               $trust_factor=r$trust_factor,
                               $id=FileAnalytics_DB::db_monitor[c]$id,
-                              $src_geo=FileAnalytics_DB::db_monitor[c]$src_geo,
-                              $dest_geo=FileAnalytics_DB::db_monitor[c]$dest_geo,
                               $uid=c$uid,
                               $fuid=FileAnalytics_DB::db_monitor[c]$fuid,
                               $filebuf=r$filebuf ];

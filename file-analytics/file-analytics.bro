@@ -9,13 +9,11 @@ export {
 
 	type Info: record {
 		uid:      string  &log;
-		id:		  conn_id &log;
+		id:		    conn_id &log;
 		fuid:     string  &log;
 		md5:   	  string  &log;
-  		ts:		  time    &log;
-		src_geo:  string  &log &default="lo";
-    	dest_geo: string  &log &default="lo";
-  		filebuf:  string  &log &optional;
+		ts:		    time    &log;
+		filebuf:  string  &log &optional;
   };
 
   redef enum Log::ID += { LOG };
@@ -54,30 +52,10 @@ event file_state_remove(f: fa_file) {
 				for ( conn in f$conns )  {
 					local id: conn_id;
 					local uid: string;
-					local _src_geo: string = "lo";
-					local _dest_geo: string = "lo";
 					local _filebuf: string = "";
 
 					id = conn;
 					uid = f$conns[conn]$uid;
-
-					if( Site::is_local_addr(id$orig_h) ) {
-						_src_geo = "lo";
-					} else {
-						local orig_loc = lookup_location(id$orig_h);
-						if ( orig_loc?$country_code ) {
-							_src_geo = orig_loc$country_code;
-						}
-					}
-
-					if( Site::is_local_addr(id$resp_h) ) {
-						_dest_geo = "lo";
-					} else {
-						local resp_loc = lookup_location(id$resp_h);
-						if ( resp_loc?$country_code ) {
-							_dest_geo = resp_loc$country_code;
-						}
-					}
 
 					if ( extract_filebuf ) {
 						if ( f?$bof_buffer && |f$bof_buffer| >= bytes_to_extract ) {
@@ -90,8 +68,6 @@ event file_state_remove(f: fa_file) {
 										$ts=f$info$ts,
 										$fuid=f$info$fuid,
 										$md5=f$info$md5,
-										$src_geo=_src_geo,
-										$dest_geo=_dest_geo,
 										$filebuf=_filebuf ];
 
 					Log::write(FileAnalytics::LOG, tmp);
